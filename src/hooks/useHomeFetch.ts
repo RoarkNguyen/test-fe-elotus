@@ -33,16 +33,27 @@ export const useHomeFetch = () => {
     };
 
     const isLoadMore = endpoint.search("page");
-
+    const isQuery = endpoint.search("query");
+    console.log(isQuery,"reset movies when search")
+    // if(isQuery !== -1) {
+    //   setState((prev) => ({
+    //     ...prev,
+    //     movies: [],
+    //   }));
+    // }
     try {
       
       let result = await (await fetch(endpoint, options)).json();
 
       console.log("Movies", result);
+      const isAdd = isLoadMore !== -1 && isQuery === -1
+      console.log("isAdd", isAdd);
+      console.log("result.results", result.results);
+
       setState((prev) => ({
         ...prev,
         movies:
-          isLoadMore !== -1
+          isLoadMore !== -1 
             ? [...prev.movies, ...result.results]
             : [...result.results],
         currentPage: result.page,

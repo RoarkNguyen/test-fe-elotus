@@ -19,8 +19,8 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div>
-          {/* <Search />
-          <Filter /> */}
+          {/* <Search /> */}
+          {/*  <Filter /> */}
           <List />
         </div>
       </main>
