@@ -2,8 +2,43 @@
   border: 1px solid red
 }
 
-.list-wrapper {
+
+.sidebar {
+  border: 5px solid green
+}
+
+.contentContainer {
+  border: 1px solid blue;
+}
+
+.content {
+  height: 500px;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+}
+
+.movieGridViewContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.movieListViewContainer {
   display: flex;
   flex-direction: column;
-  gap: 2rem
+  gap: 1rem
+}
+
+
+.btnLoadMore {
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
 }

@@ -3,7 +3,7 @@ import { POPULAR_BASE_URL, SEARCH_BASE_URL } from "@/config/config";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useHomeFetch } from "@/hooks/useHomeFetch";
 import { MovieType } from "@/types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
 
@@ -32,6 +32,9 @@ export const List = () => {
     fetchMovies,
   } = useHomeFetch();
   console.log(state, "_state");
+  const [displayMovie, setDisplayMovie] = useState<"list-view" | "grid-view">(
+    "list-view"
+  );
 
   const loadMoreMovies = () => {
     const searchPoint = `${SEARCH_BASE_URL}${searchKey}&page=${
@@ -56,39 +59,60 @@ export const List = () => {
 
   return (
     <div className={style.container}>
-      {loading && <Loading />}
-      <div>text: {text}</div>
-      <div>searchKey: {searchKey}</div>
-      <input type="text" onChange={(e) => setText(e.target.value)} />
-
-      {state.totalPages}
-      <div>
-        {listMovieType.map((item) => {
-          return (
-            <div
-              key={item.title}
-              onClick={() => handleChangeMovieType(item.url)}
-            >
-              {item.title}
-            </div>
-          );
-        })}
+      <div className={style.sidebar}>
+        displayMovie: {displayMovie}
+        <div onClick={() => setDisplayMovie("grid-view")}>Change grid view</div>
+        <div onClick={() => setDisplayMovie("list-view")}>Change list view</div>
+        {loading && <Loading />}
+        <div>text: {text}</div>
+        <div>searchKey: {searchKey}</div>
+        <input type="text" onChange={(e) => setText(e.target.value)} />
+        {state.totalPages}
+        <div>
+          {listMovieType.map((item) => {
+            return (
+              <div
+                key={item.title}
+                onClick={() => handleChangeMovieType(item.url)}
+              >
+                {item.title}
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div>
-        {state.movies && state.movies.length > 0 ? (
-          <div className="list-wrapper">
-            {state.movies.map((movie) => {
-              return <Movie movie={movie} key={movie.id} />;
-            })}
-          </div>
-        ) : (
-          <div>Movie empty</div>
+      <div className={style.contentContainer}>
+        <div className={style.content}>
+          {state.movies && state.movies.length > 0 ? (
+            <div
+              className={
+                displayMovie === "list-view"
+                  ? style.movieListViewContainer
+                  : style.movieGridViewContainer
+              }
+            >
+              {state.movies.map((movie, index) => {
+                return (
+                  <Movie
+                    displayMovie={displayMovie}
+                    movie={movie}
+                    key={movie.id}
+                    index={index + 1}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div>Movie empty</div>
+          )}
+        </div>
+
+        {state.currentPage < state.totalPages && !loading && (
+          <button className={style.btnLoadMore} onClick={loadMoreMovies}>
+            load more
+          </button>
         )}
       </div>
-
-      {state.currentPage < state.totalPages && !loading && (
-        <button onClick={loadMoreMovies}>load more</button>
-      )}
     </div>
   );
 };
