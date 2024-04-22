@@ -8,7 +8,7 @@ import { Search } from "@/components/movies/search/search";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function MovieList() {
   return (
     <>
       <Head>

@@ -41,7 +41,6 @@ export const List = () => {
 
     const endpoint = searchKey ? searchPoint : movieTypePoint;
     fetchMovies(endpoint);
-    //console.log('loaded');
   };
 
   const {
@@ -76,9 +75,15 @@ export const List = () => {
         })}
       </div>
       <div>
-        {state.movies.map((movie) => {
-          return <Movie movie={movie} key={movie.id} />;
-        })}
+        {state.movies && state.movies.length > 0 ? (
+          <div className="list-wrapper">
+            {state.movies.map((movie) => {
+              return <Movie movie={movie} key={movie.id} />;
+            })}
+          </div>
+        ) : (
+          <div>Movie empty</div>
+        )}
       </div>
 
       {state.currentPage < state.totalPages && !loading && (

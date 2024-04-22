@@ -3,6 +3,7 @@ export type Movie = {
   poster_path: string;
   id: number;
   title: string;
+  original_title: string;
   vote_average: number;
   vote_count: number;
 };
