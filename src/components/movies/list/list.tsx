@@ -1,16 +1,11 @@
-import {
-  NOW_PLAYING_BASE_URL,
-  POPULAR_BASE_URL,
-  SEARCH_BASE_URL,
-  TOP_RATED_BASE_URL,
-} from "@/config/config";
+import { Loading } from "@/components/shared/loading/loading";
+import { POPULAR_BASE_URL, SEARCH_BASE_URL } from "@/config/config";
+import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useHomeFetch } from "@/hooks/useHomeFetch";
 import { MovieType } from "@/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
-import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { Loading } from "@/components/shared/loading/loading";
 
 const listMovieType = [
   {

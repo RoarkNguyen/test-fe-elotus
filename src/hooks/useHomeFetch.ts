@@ -54,8 +54,6 @@ export const useHomeFetch = () => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMzdlMzJmMzVlMzE3NDg3OGFlZTMzMjIxM2FiNGUzMyIsInN1YiI6IjY2MjVlMTg4MmRkYTg5MDE4N2UzMThhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iNd-s-lR5wsJUhDdXrFOxsgbF-JgVXUOgRkj7NbfDdg",
       },
     };
 

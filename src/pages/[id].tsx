@@ -1,11 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { List } from "@/components/movies/list/list";
-import { Filter } from "@/components/movies/filter/filter";
-import { Search } from "@/components/movies/search/search";
 import { GetServerSidePropsContext } from "next";
+import { Inter } from "next/font/google";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,12 +48,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMzdlMzJmMzVlMzE3NDg3OGFlZTMzMjIxM2FiNGUzMyIsInN1YiI6IjY2MjVlMTg4MmRkYTg5MDE4N2UzMThhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iNd-s-lR5wsJUhDdXrFOxsgbF-JgVXUOgRkj7NbfDdg",
     },
   };
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-  const endpoint = `https://api.themoviedb.org/3/movie/${query.id}`;
+  const endpoint = `https://api.themoviedb.org/3/movie/${query.id}?api_key=${API_KEY}`;
   console.log(endpoint, "_endpoint");
 
   try {
