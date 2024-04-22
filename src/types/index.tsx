@@ -12,3 +12,11 @@ export type Movies = {
   currentPage: number;
   totalPages: number;
 };
+
+export const MovieType = {
+  POPULAR: "popular",
+  TOP_RATED: "top_rated",
+  NOW_PLAYING: "now_playing",
+} as const;
+
+export type MovieTypeArray = Array<(typeof MovieType)[keyof typeof MovieType]>;
