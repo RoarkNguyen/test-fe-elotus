@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Test FE Elotus</title>
-        <meta name="description" content="Test FE Elotus by Roark" />
+        <title>Movies</title>
+        <meta name="description" content="List movies" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

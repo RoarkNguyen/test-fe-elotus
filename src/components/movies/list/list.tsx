@@ -10,25 +10,33 @@ import { useEffect, useState } from "react";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
+import { Loading } from "@/components/shared/loading/loading";
+
+const listMovieType = [
+  {
+    title: "Popular",
+    url: MovieType.POPULAR,
+  },
+  {
+    title: "Top rated",
+    url: MovieType.TOP_RATED,
+  },
+  {
+    title: "Now playing",
+    url: MovieType.NOW_PLAYING,
+  },
+];
 
 export const List = () => {
-  const { state, loading, error, fetchMovies } = useHomeFetch();
+  const {
+    state,
+    loading,
+    error,
+    movieUrlCurrent,
+    handleChangeMovieType,
+    fetchMovies,
+  } = useHomeFetch();
   console.log(state, "_state");
-  const [movieUrlCurrent, setMovieUrlCurrent] = useState(POPULAR_BASE_URL);
-  const listMovieType = [
-    {
-      title: "Popular",
-      url: MovieType.POPULAR,
-    },
-    {
-      title: "Top rated",
-      url: MovieType.TOP_RATED,
-    },
-    {
-      title: "Now playing",
-      url: MovieType.NOW_PLAYING,
-    },
-  ];
 
   const loadMoreMovies = () => {
     const searchPoint = `${SEARCH_BASE_URL}${searchKey}&page=${
@@ -39,33 +47,6 @@ export const List = () => {
     const endpoint = searchKey ? searchPoint : movieTypePoint;
     fetchMovies(endpoint);
     //console.log('loaded');
-  };
-
-  const handleChangeMovieType = (type: string) => {
-    console.log(type, "_type");
-
-    let endpoint = "";
-
-    switch (type) {
-      case MovieType.POPULAR:
-        endpoint = POPULAR_BASE_URL;
-        break;
-
-      case MovieType.TOP_RATED:
-        endpoint = TOP_RATED_BASE_URL;
-        break;
-
-      case MovieType.NOW_PLAYING:
-        endpoint = NOW_PLAYING_BASE_URL;
-        break;
-
-      default:
-        endpoint = POPULAR_BASE_URL;
-        break;
-    }
-    console.log(endpoint, "_endpoint change movie");
-    setMovieUrlCurrent(endpoint);
-    fetchMovies(endpoint);
   };
 
   const {
@@ -81,6 +62,7 @@ export const List = () => {
 
   return (
     <div className={style.container}>
+      {loading && <Loading />}
       <div>text: {text}</div>
       <div>searchKey: {searchKey}</div>
       <input type="text" onChange={(e) => setText(e.target.value)} />

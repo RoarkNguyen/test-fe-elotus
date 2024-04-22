@@ -1,5 +1,5 @@
-import { POPULAR_BASE_URL } from "@/config/config";
-import { Movies } from "@/types";
+import { NOW_PLAYING_BASE_URL, POPULAR_BASE_URL, TOP_RATED_BASE_URL } from "@/config/config";
+import { MovieType, Movies } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 
@@ -12,12 +12,39 @@ export const useHomeFetch = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
+  const [movieUrlCurrent, setMovieUrlCurrent] = useState(POPULAR_BASE_URL);
   // const { isLoading, error, isError, data } = useQuery({
   //   queryKey: ["todos"],
   //   queryFn: (endpoint:string) =>
   //     fetch(endpoint).then((res) => res.json()),
   // });
+
+  const handleChangeMovieType = (type: string) => {
+    console.log(type, "_type");
+
+    let endpoint = "";
+
+    switch (type) {
+      case MovieType.POPULAR:
+        endpoint = POPULAR_BASE_URL;
+        break;
+
+      case MovieType.TOP_RATED:
+        endpoint = TOP_RATED_BASE_URL;
+        break;
+
+      case MovieType.NOW_PLAYING:
+        endpoint = NOW_PLAYING_BASE_URL;
+        break;
+
+      default:
+        endpoint = POPULAR_BASE_URL;
+        break;
+    }
+    console.log(endpoint, "_endpoint change movie");
+    setMovieUrlCurrent(endpoint);
+    fetchMovies(endpoint);
+  };
 
   const fetchMovies = async (endpoint: string) => {
     // setError(false);
@@ -70,5 +97,5 @@ export const useHomeFetch = () => {
     fetchMovies(`${POPULAR_BASE_URL}`);
   }, []);
 
-  return { state, loading, error, fetchMovies };
+  return { state, loading, error, movieUrlCurrent, handleChangeMovieType, fetchMovies };
 };
