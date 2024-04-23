@@ -1,4 +1,4 @@
-import { List } from "@/components/movies/list/list";
+import { List } from "@/components/movies/list";
 import styles from "@/styles/movie-list.module.css";
 import { Inter } from "next/font/google";
 import Head from "next/head";
@@ -15,9 +15,7 @@ export default function MovieList() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div>
-          <List />
-        </div>
+        <List />
       </main>
     </>
   );

@@ -37,7 +37,7 @@ export const List = () => {
     fetchMovies,
   } = useHomeFetch();
   console.log(state, "_state");
-  const [displayMovie, setDisplayMovie] = useState("list-view");
+  const [displayMovie, setDisplayMovie] = useState("grid-view");
 
   const [movieType, setMovieType] = useState("popular");
 
@@ -154,9 +154,11 @@ export const List = () => {
         </div>
 
         {state.currentPage < state.totalPages && !loading && (
-          <button className={style.btnLoadMore} onClick={loadMoreMovies}>
-            load more
-          </button>
+          <div className={style.loadMoreButtonContainer}>
+            <button className={style.btnLoadMore} onClick={loadMoreMovies}>
+              Load more
+            </button>
+          </div>
         )}
       </div>
     </div>
