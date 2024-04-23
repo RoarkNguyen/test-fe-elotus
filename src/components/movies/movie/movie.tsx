@@ -38,7 +38,7 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
         )}
         <div className={style.imgContainer}>
           <FadeIn>
-            <img
+            <Image
               width={displayMovie === "list-view" ? 40 : 80}
               height={displayMovie === "list-view" ? 60 : 120}
               src={urlImage}

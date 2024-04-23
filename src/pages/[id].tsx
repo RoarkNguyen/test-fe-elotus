@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { GetServerSidePropsContext } from "next";
 import { Inter } from "next/font/google";
 import Head from "next/head";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,7 +43,7 @@ export default function MovieDetails({ movie }: { movie: MovieDetails }) {
         <div className={styles.cardMovie}>
           <div className={styles.imgContainer}>
             <FadeIn duration={500}>
-              <img
+              <Image
                 src={urlImage}
                 alt={movie.original_title}
                 width={300}
