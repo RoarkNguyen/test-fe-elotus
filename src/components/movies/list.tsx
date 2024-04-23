@@ -24,7 +24,8 @@ const listDisplayView = [
   },
 ];
 
-export const List = () => {
+export const List = ({ stateProps }: { stateProps: any }) => {
+  console.log(stateProps, "_stateProps in List");
   const inputRef = useRef<any>(null);
   const {
     state,
@@ -33,7 +34,9 @@ export const List = () => {
     movieUrlCurrent,
     handleChangeMovieType,
     fetchMovies,
+    setState,
   } = useHomeFetch();
+
   const [displayMovie, setDisplayMovie] = useState("grid-view");
 
   const [movieType, setMovieType] = useState("popular");
@@ -55,14 +58,17 @@ export const List = () => {
   } = useDebouncedValue<string>("");
 
   useEffect(() => {
-    if (searchKey.length > 0) {
-      const endpoint = searchKey
-        ? SEARCH_BASE_URL + searchKey
-        : POPULAR_BASE_URL;
-      fetchMovies(endpoint);
-      alert("search");
-    }
+    const endpoint = searchKey ? SEARCH_BASE_URL + searchKey : POPULAR_BASE_URL;
+    fetchMovies(endpoint);
   }, [searchKey]);
+
+  useEffect(() => {
+    setState(() => ({
+      movies: [...stateProps.results],
+      currentPage: stateProps.page,
+      totalPages: stateProps.total_pages,
+    }));
+  }, [stateProps]);
 
   return (
     <div className={style.container}>
@@ -184,10 +190,3 @@ export const List = () => {
     </div>
   );
 };
-
-export async function getServerSideProps() {
-  const res = await fetch(`https://.../data`);
-  const data = await res.json();
-
-  return { props: { data } };
-}

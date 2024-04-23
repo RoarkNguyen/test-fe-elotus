@@ -76,11 +76,5 @@ export const useHomeFetch = () => {
     }
   },[])
 
-  
-
-  useEffect(() => {
-    fetchMovies(`${POPULAR_BASE_URL}`);
-  }, []);
-
-  return { state, loading, error, movieUrlCurrent, handleChangeMovieType, fetchMovies };
+  return { state, loading, error, movieUrlCurrent, handleChangeMovieType, fetchMovies,setState };
 };
