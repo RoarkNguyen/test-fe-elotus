@@ -41,7 +41,6 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
               width={displayMovie === "list-view" ? 40 : 80}
               height={displayMovie === "list-view" ? 60 : 120}
               src={urlImage}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={style.image}
               alt={movie.original_title}
               loading="lazy"
