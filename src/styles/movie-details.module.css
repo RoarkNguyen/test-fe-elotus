@@ -2,7 +2,6 @@
     padding: 2rem 4rem;
     max-width: 1600px;
     margin: 0 auto;
-
 }
 
 .cardMovie {
@@ -59,4 +58,41 @@
     align-items: center;
     color:crimson;
     font-weight: bold;
+}
+
+.back {
+    margin-bottom: 1rem;
+}
+
+
+@media only screen and (max-width: 900px) { 
+
+    .main {
+        padding: 0rem 12px;
+    }
+    
+
+    .cardMovie { 
+        flex-direction: column;
+        border-radius: 12px;
+        
+    }
+    .cardMovie .infor .title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    
+    .cardMovie .infor .desc {
+        font-size: 0.875rem;
+    }
+
+    .cardMovie .imgContainer {
+        height: auto;
+        width: 100%;
+    }
+
+    .cardMovie .imgContainer .image{
+        width: 100%;
+    }
+
 }

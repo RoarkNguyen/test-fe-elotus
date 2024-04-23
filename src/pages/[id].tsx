@@ -1,5 +1,7 @@
+import { Back } from "@/components/shared/back/back";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "@/config/config";
 import styles from "@/styles/movie-details.module.css";
+import clsx from "clsx";
 import { GetServerSidePropsContext } from "next";
 import { Inter } from "next/font/google";
 import Head from "next/head";
@@ -35,7 +37,8 @@ export default function MovieDetails({ movie }: { movie: MovieDetails }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={clsx(styles.main, inter.className)}>
+        <Back className={styles.back} />
         <div className={styles.cardMovie}>
           <div className={styles.imgContainer}>
             <img

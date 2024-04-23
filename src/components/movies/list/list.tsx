@@ -3,7 +3,7 @@ import { POPULAR_BASE_URL, SEARCH_BASE_URL } from "@/config/config";
 import { listMovieType } from "@/constants";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useHomeFetch } from "@/hooks/useHomeFetch";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
 import { DisplayViewType, MovieType } from "@/types";
@@ -11,6 +11,7 @@ import clsx from "clsx";
 import GridIcon from "@/icons/grid-icon";
 import ListIcon from "@/icons/list-icon";
 import { toast } from "react-toastify";
+import CloseIcon from "@/icons/close-icon";
 
 const listDisplayView = [
   {
@@ -26,6 +27,7 @@ const listDisplayView = [
 ];
 
 export const List = () => {
+  const inputRef = useRef<any>(null);
   const {
     state,
     loading,
@@ -73,7 +75,10 @@ export const List = () => {
                     handleChangeMovieType(item.url);
                     setMovieType(item.url);
                   }}
-                  className={clsx(style.label, style.labelActive)}
+                  className={clsx(
+                    style.label,
+                    movieType === item.url && style.labelActive
+                  )}
                 >
                   {item.title}
                 </div>
@@ -81,15 +86,25 @@ export const List = () => {
             })}
         </div>
         <div className={style.sidebarCenter}>
-          {/* <label htmlFor="search">Search</label> */}
-          <input
-            id="search"
-            placeholder="Search movies..."
-            className={style.search}
-            type="text"
-            onChange={(e) => setText(e.target.value)}
-          />
-          <span>{state.totalPages}</span>
+          <div className={style.searchContainer}>
+            <input
+              ref={inputRef}
+              id="search"
+              placeholder="Search movies..."
+              className={style.search}
+              type="text"
+              onChange={(e) => setText(e.target.value)}
+            />
+            <div
+              className={style.iconClose}
+              onClick={() => {
+                inputRef.current.value = "";
+                setText("");
+              }}
+            >
+              <CloseIcon />
+            </div>
+          </div>
         </div>
         <div className={style.sidebarRight}>
           <div className={style.listDisplayView}>

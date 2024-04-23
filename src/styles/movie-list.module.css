@@ -3,3 +3,10 @@
     max-width: 1600px;
     margin: 0 auto;
 }
+
+@media only screen and (max-width: 900px) { 
+    .main {
+        padding: 0rem 12px;
+    }
+    
+}
