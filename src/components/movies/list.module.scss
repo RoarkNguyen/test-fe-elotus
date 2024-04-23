@@ -59,7 +59,7 @@
 }
 
 .contentContainer {
-  // margin-top: 3rem;
+
   padding: 2rem 0rem;
 }
 
@@ -156,6 +156,10 @@
   margin-top: 2rem;
 }
 
+.skeleton {
+  margin-top: 2rem;
+}
+
 .birdIcon {
   margin-top: 4rem;
   width: 25rem;
@@ -208,11 +212,15 @@
     }
 
     .movieGridViewContainer {
-      gap: 0.5rem;
+      gap: 1rem;
       grid-template-columns: auto auto;
     }
 
 
+  }
+
+  .skeleton {
+    margin-top: 1rem;
   }
 
   .notFound {

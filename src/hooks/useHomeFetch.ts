@@ -51,7 +51,6 @@ export const useHomeFetch = () => {
     };
 
     const isLoadMore = endpoint.search("page");
-    
     try {
       
       const response = await fetch(endpoint, options);
@@ -59,9 +58,7 @@ export const useHomeFetch = () => {
         throw new Error(`Network response was not ok (${response.status})`);
       }
       const result = await response.json();
-
-      console.log("Movies", result);
-      console.log("state", state);
+      
       setState((prev) => ({
         ...prev,
         movies:

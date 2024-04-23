@@ -47,6 +47,7 @@
     width: 100%;
     height: auto;
     overflow: hidden;
+    cursor: pointer;
 
     .image {
       width: 100%;
@@ -54,7 +55,7 @@
     }
 
     .image:hover {
-      transition: all 0.35s ease-in;
+      transition: all 0.3s ease-in;
       transform: scale(1.1);
     }
 

@@ -7,9 +7,9 @@ export default function BirdIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="0.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="0.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={className}
     >
       <path d="M16 7h.01" />
