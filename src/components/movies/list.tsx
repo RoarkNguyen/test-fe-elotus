@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { GridCardSkeleton, ListCardSkeleton } from "../shared/skeleton";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
+import MemoizedMovies from "./results/results";
 
 const listDisplayView = [
   {
@@ -142,24 +143,7 @@ export const List = ({ stateProps }: { stateProps: any }) => {
           {state.currentPage === 0 ? (
             <SkeletonMovies displayMovie={displayMovie} />
           ) : state.movies && state.movies.length > 0 ? (
-            <div
-              className={
-                displayMovie === "list-view"
-                  ? style.movieListViewContainer
-                  : style.movieGridViewContainer
-              }
-            >
-              {state.movies.map((movie, index) => {
-                return (
-                  <Movie
-                    displayMovie={displayMovie}
-                    movie={movie}
-                    key={movie.id + movie.title}
-                    index={index + 1}
-                  />
-                );
-              })}
-            </div>
+            <MemoizedMovies movies={state.movies} displayMovie={displayMovie} />
           ) : (
             <div className={style.notFound}>
               <div>Your search did not match any results</div>
