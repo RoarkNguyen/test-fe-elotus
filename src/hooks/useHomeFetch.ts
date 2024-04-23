@@ -1,7 +1,7 @@
 import { NOW_PLAYING_BASE_URL, POPULAR_BASE_URL, TOP_RATED_BASE_URL } from "@/config/config";
 import { movieTypes } from "@/constants";
 import { Movies } from "@/types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 
 export const useHomeFetch = () => {
@@ -40,7 +40,7 @@ export const useHomeFetch = () => {
     fetchMovies(endpoint);
   };
 
-  const fetchMovies = async (endpoint: string) => {
+  const fetchMovies = useCallback(async (endpoint: string) => {
     setLoading(true);
 
     const options = {
@@ -74,7 +74,9 @@ export const useHomeFetch = () => {
     } finally {
       setLoading(false);
     }
-  };
+  },[])
+
+  
 
   useEffect(() => {
     fetchMovies(`${POPULAR_BASE_URL}`);
