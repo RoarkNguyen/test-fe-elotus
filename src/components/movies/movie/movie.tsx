@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "@/config/config";
 import Image from "next/image";
 import clsx from "clsx";
+import FadeIn from "@/components/shared/fade-in/fade-in";
 
 type Props = {
   movie: MovieType;
@@ -36,13 +37,15 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
           <div className={style.number}>{index}</div>
         )}
         <div className={style.imgContainer}>
-          <img
-            width={displayMovie === "list-view" ? 40 : 80}
-            height={displayMovie === "list-view" ? 60 : 120}
-            src={urlImage}
-            className={style.image}
-            alt={movie.original_title}
-          />
+          <FadeIn>
+            <img
+              width={displayMovie === "list-view" ? 40 : 80}
+              height={displayMovie === "list-view" ? 60 : 120}
+              src={urlImage}
+              className={style.image}
+              alt={movie.original_title}
+            />
+          </FadeIn>
         </div>
 
         <div className={clsx(displayMovie === "grid-view" && style.info)}>

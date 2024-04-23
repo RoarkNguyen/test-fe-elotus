@@ -1,4 +1,5 @@
 import { Back } from "@/components/shared/back/back";
+import FadeIn from "@/components/shared/fade-in/fade-in";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "@/config/config";
 import styles from "@/styles/movie-details.module.css";
 import clsx from "clsx";
@@ -41,14 +42,17 @@ export default function MovieDetails({ movie }: { movie: MovieDetails }) {
         <Back className={styles.back} />
         <div className={styles.cardMovie}>
           <div className={styles.imgContainer}>
-            <img
-              src={urlImage}
-              alt={movie.original_title}
-              width={300}
-              height={450}
-              className={styles.image}
-            />
+            <FadeIn duration={500}>
+              <img
+                src={urlImage}
+                alt={movie.original_title}
+                width={300}
+                height={450}
+                className={styles.image}
+              />
+            </FadeIn>
           </div>
+
           <div className={styles.infor}>
             <div className={styles.title}>{movie.original_title}</div>
             <div className={styles.desc}>{movie.overview}</div>

@@ -13,6 +13,7 @@ import ListIcon from "@/icons/list-icon";
 import { toast } from "react-toastify";
 import CloseIcon from "@/icons/close-icon";
 import { GridCardSkeleton, ListCardSkeleton } from "../shared/skeleton";
+import FadeIn from "../shared/fade-in/fade-in";
 
 const listDisplayView = [
   {
