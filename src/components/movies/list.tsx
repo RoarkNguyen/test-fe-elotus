@@ -1,19 +1,16 @@
-import { Loading } from "@/components/shared/loading/loading";
 import { POPULAR_BASE_URL, SEARCH_BASE_URL } from "@/config/config";
 import { listMovieType } from "@/constants";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useHomeFetch } from "@/hooks/useHomeFetch";
-import { useEffect, useRef, useState } from "react";
-import style from "./list.module.scss";
-import { Movie } from "./movie/movie";
-import { DisplayViewType, MovieType } from "@/types";
-import clsx from "clsx";
+import BirdIcon from "@/icons/bird-icon";
+import CloseIcon from "@/icons/close-icon";
 import GridIcon from "@/icons/grid-icon";
 import ListIcon from "@/icons/list-icon";
-import { toast } from "react-toastify";
-import CloseIcon from "@/icons/close-icon";
+import clsx from "clsx";
+import { useEffect, useRef, useState } from "react";
 import { GridCardSkeleton, ListCardSkeleton } from "../shared/skeleton";
-import FadeIn from "../shared/fade-in/fade-in";
+import style from "./list.module.scss";
+import { Movie } from "./movie/movie";
 
 const listDisplayView = [
   {
@@ -164,7 +161,10 @@ export const List = () => {
               })}
             </div>
           ) : (
-            <div>Movie empty</div>
+            <div className={style.notFound}>
+              <div>Your search did not match any results</div>
+              <BirdIcon className={clsx(style.birdIcon, style.birdAnimation)} />
+            </div>
           )}
         </div>
 

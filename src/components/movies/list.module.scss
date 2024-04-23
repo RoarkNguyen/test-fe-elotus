@@ -149,6 +149,45 @@
   opacity: 0.7;
 }
 
+.notFound {
+  text-align: center;
+  color: #ccc;
+  font-style: italic;
+  margin-top: 2rem;
+}
+
+.birdIcon {
+  margin-top: 4rem;
+  width: 25rem;
+  height: 25rem;
+
+  .birdAnimation {
+    animation: rotate 1s linear infinite alternate;
+    transition: all 0.3s ease-in-out;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotateY(180deg);
+    }
+
+    49% {
+      transform: rotateY(180deg);
+    }
+
+    50% {
+      transform: rotateY(0deg);
+    }
+
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
+}
+
+
+
+
 
 @media only screen and (max-width: 900px) {
   .sidebar {
@@ -175,4 +214,15 @@
 
 
   }
+
+  .notFound {
+    margin-top: 1rem;
+
+    .birdIcon {
+      margin-top: 1rem;
+      width: 15rem;
+      height: 15rem;
+    }
+  }
+
 }
