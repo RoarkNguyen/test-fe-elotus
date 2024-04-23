@@ -1,7 +1,9 @@
 import { NOW_PLAYING_BASE_URL, POPULAR_BASE_URL, TOP_RATED_BASE_URL } from "@/config/config";
-import { MovieType, Movies } from "@/types";
+import { movieTypes } from "@/constants";
+import { Movies } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const useHomeFetch = () => {
   const [state, setState] = useState<Movies>({
@@ -25,15 +27,15 @@ export const useHomeFetch = () => {
     let endpoint = "";
 
     switch (type) {
-      case MovieType.POPULAR:
+      case movieTypes.POPULAR:
         endpoint = POPULAR_BASE_URL;
         break;
 
-      case MovieType.TOP_RATED:
+      case movieTypes.TOP_RATED:
         endpoint = TOP_RATED_BASE_URL;
         break;
 
-      case MovieType.NOW_PLAYING:
+      case movieTypes.NOW_PLAYING:
         endpoint = NOW_PLAYING_BASE_URL;
         break;
 
@@ -47,7 +49,6 @@ export const useHomeFetch = () => {
   };
 
   const fetchMovies = async (endpoint: string) => {
-    // setError(false);
     setLoading(true);
 
     const options = {
@@ -59,22 +60,17 @@ export const useHomeFetch = () => {
 
     const isLoadMore = endpoint.search("page");
     const isQuery = endpoint.search("query");
-    console.log(isQuery,"reset movies when search")
-    // if(isQuery !== -1) {
-    //   setState((prev) => ({
-    //     ...prev,
-    //     movies: [],
-    //   }));
-    // }
+    
     try {
       
-      let result = await (await fetch(endpoint, options)).json();
+      const response = await fetch(endpoint, options);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok (${response.status})`);
+      }
+      const result = await response.json();
 
       console.log("Movies", result);
       const isAdd = isLoadMore !== -1 && isQuery === -1
-      console.log("isAdd", isAdd);
-      console.log("result.results", result.results);
-
       setState((prev) => ({
         ...prev,
         movies:
@@ -86,9 +82,11 @@ export const useHomeFetch = () => {
       }));
     } catch (error) {
       setError(true);
-      console.log(error);
+      console.log(error,"_error data");
+      toast.error("Network response was not ok");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {

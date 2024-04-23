@@ -1,24 +1,27 @@
 import { Loading } from "@/components/shared/loading/loading";
 import { POPULAR_BASE_URL, SEARCH_BASE_URL } from "@/config/config";
+import { listMovieType } from "@/constants";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useHomeFetch } from "@/hooks/useHomeFetch";
-import { MovieType } from "@/types";
 import { useEffect, useState } from "react";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
+import { DisplayViewType, MovieType } from "@/types";
+import clsx from "clsx";
+import GridIcon from "@/icons/grid-icon";
+import ListIcon from "@/icons/list-icon";
+import { toast } from "react-toastify";
 
-const listMovieType = [
+const listDisplayView = [
   {
-    title: "Popular",
-    url: MovieType.POPULAR,
+    name: "List view",
+    key: "list-view",
+    icon: <ListIcon />,
   },
   {
-    title: "Top rated",
-    url: MovieType.TOP_RATED,
-  },
-  {
-    title: "Now playing",
-    url: MovieType.NOW_PLAYING,
+    name: "Grid view",
+    key: "grid-view",
+    icon: <GridIcon />,
   },
 ];
 
@@ -32,9 +35,9 @@ export const List = () => {
     fetchMovies,
   } = useHomeFetch();
   console.log(state, "_state");
-  const [displayMovie, setDisplayMovie] = useState<"list-view" | "grid-view">(
-    "list-view"
-  );
+  const [displayMovie, setDisplayMovie] = useState("list-view");
+
+  const [movieType, setMovieType] = useState("popular");
 
   const loadMoreMovies = () => {
     const searchPoint = `${SEARCH_BASE_URL}${searchKey}&page=${
@@ -60,30 +63,58 @@ export const List = () => {
   return (
     <div className={style.container}>
       <div className={style.sidebar}>
-        displayMovie: {displayMovie}
-        <div onClick={() => setDisplayMovie("grid-view")}>Change grid view</div>
-        <div onClick={() => setDisplayMovie("list-view")}>Change list view</div>
-        {loading && <Loading />}
-        <div>text: {text}</div>
-        <div>searchKey: {searchKey}</div>
-        <input type="text" onChange={(e) => setText(e.target.value)} />
-        {state.totalPages}
-        <div>
-          {listMovieType.map((item) => {
-            return (
-              <div
-                key={item.title}
-                onClick={() => handleChangeMovieType(item.url)}
-              >
-                {item.title}
-              </div>
-            );
-          })}
+        <div className={style.labels}>
+          {listMovieType &&
+            listMovieType.map((item) => {
+              return (
+                <div
+                  key={item.title}
+                  onClick={() => {
+                    handleChangeMovieType(item.url);
+                    setMovieType(item.url);
+                  }}
+                  className={clsx(style.label, style.labelActive)}
+                >
+                  {item.title}
+                </div>
+              );
+            })}
+        </div>
+        <div className={style.sidebarCenter}>
+          {/* <label htmlFor="search">Search</label> */}
+          <input
+            id="search"
+            placeholder="Search movies..."
+            className={style.search}
+            type="text"
+            onChange={(e) => setText(e.target.value)}
+          />
+          <span>{state.totalPages}</span>
+        </div>
+        <div className={style.sidebarRight}>
+          <div className={style.listDisplayView}>
+            {listDisplayView &&
+              listDisplayView.map((view) => {
+                return (
+                  <div
+                    className={clsx(
+                      style.displayView,
+                      displayMovie === view.key && style.displayViewActive
+                    )}
+                    onClick={() => setDisplayMovie(view.key)}
+                  >
+                    {view.icon}
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>
       <div className={style.contentContainer}>
         <div className={style.content}>
-          {state.movies && state.movies.length > 0 ? (
+          {loading ? (
+            <Loading />
+          ) : state.movies && state.movies.length > 0 ? (
             <div
               className={
                 displayMovie === "list-view"

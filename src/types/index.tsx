@@ -14,10 +14,6 @@ export type Movies = {
   totalPages: number;
 };
 
-export const MovieType = {
-  POPULAR: "popular",
-  TOP_RATED: "top_rated",
-  NOW_PLAYING: "now_playing",
-} as const;
+export type MovieType = "popular" | "top_rated" | "now_playing";
 
-export type MovieTypeArray = Array<(typeof MovieType)[keyof typeof MovieType]>;
+export type DisplayViewType = "list-view" | "grid-view";
