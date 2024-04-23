@@ -1,10 +1,9 @@
 import FadeIn from "@/components/shared/fade-in/fade-in";
-import { IMAGE_BASE_URL, POSTER_SIZE } from "@/config/config";
+import { CARD_SIZE, IMAGE_BASE_URL } from "@/config/config";
 import { Movie as MovieType } from "@/types";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import style from "./movie.module.scss";
 
 type Props = {
@@ -15,9 +14,8 @@ type Props = {
 };
 
 export const Movie = ({ movie, displayMovie, index, className }: Props) => {
-  const router = useRouter();
   const urlImage = movie.poster_path
-    ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
+    ? `${IMAGE_BASE_URL}${CARD_SIZE}${movie.poster_path}`
     : "/images/no-image.png";
 
   return (

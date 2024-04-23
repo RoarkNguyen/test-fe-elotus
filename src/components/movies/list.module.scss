@@ -2,7 +2,6 @@
   margin-top: 20px;
 }
 
-
 .sidebar {
   display: flex;
   width: 100%;
@@ -14,14 +13,14 @@
 
 .sidebarCenter {
   display: flex;
-  gap: 1rem
+  gap: 1rem;
 }
 
 .sidebarRight {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem
+  gap: 1rem;
 }
 
 .searchContainer {
@@ -59,7 +58,6 @@
 }
 
 .contentContainer {
-
   padding: 2rem 0rem;
 }
 
@@ -79,7 +77,7 @@
 .movieListViewContainer {
   display: flex;
   flex-direction: column;
-  gap: 1rem
+  gap: 1rem;
 }
 
 .listDisplayView {
@@ -96,7 +94,7 @@
 }
 
 .displayViewActive {
-  color: #405cf5
+  color: #405cf5;
 }
 
 .labels {
@@ -142,7 +140,6 @@
   width: 100%;
   max-width: 400px;
   font-size: 1rem;
-
 }
 
 .btnLoadMore:hover {
@@ -159,39 +156,6 @@
 .skeleton {
   margin-top: 2rem;
 }
-
-.birdIcon {
-  margin-top: 4rem;
-  width: 25rem;
-  height: 25rem;
-
-  .birdAnimation {
-    animation: rotate 1s linear infinite alternate;
-    transition: all 0.3s ease-in-out;
-  }
-
-  @keyframes rotate {
-    0% {
-      transform: rotateY(180deg);
-    }
-
-    49% {
-      transform: rotateY(180deg);
-    }
-
-    50% {
-      transform: rotateY(0deg);
-    }
-
-    100% {
-      transform: rotateY(0deg);
-    }
-  }
-}
-
-
-
-
 
 @media only screen and (max-width: 900px) {
   .sidebar {
@@ -215,8 +179,6 @@
       gap: 1rem;
       grid-template-columns: auto auto;
     }
-
-
   }
 
   .skeleton {
@@ -225,12 +187,5 @@
 
   .notFound {
     margin-top: 1rem;
-
-    .birdIcon {
-      margin-top: 1rem;
-      width: 15rem;
-      height: 15rem;
-    }
   }
-
 }
