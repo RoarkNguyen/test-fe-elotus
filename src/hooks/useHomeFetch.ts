@@ -12,7 +12,6 @@ export const useHomeFetch = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [movieUrlCurrent, setMovieUrlCurrent] = useState(POPULAR_BASE_URL);
 
   const handleChangeMovieType = (type: string) => {
@@ -39,6 +38,7 @@ export const useHomeFetch = () => {
     setMovieUrlCurrent(endpoint);
     fetchMovies(endpoint);
   };
+
 
   const fetchMovies = useCallback(async (endpoint: string) => {
     setLoading(true);
@@ -69,12 +69,11 @@ export const useHomeFetch = () => {
         totalPages: result.total_pages,
       }));
     } catch (error) {
-      setError(true);
       toast.error("Network response was not ok");
     } finally {
       setLoading(false);
     }
   },[])
 
-  return { state, loading, error, movieUrlCurrent, handleChangeMovieType, fetchMovies,setState };
+  return { state, loading, movieUrlCurrent, handleChangeMovieType, fetchMovies,setState };
 };

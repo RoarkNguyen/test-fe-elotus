@@ -25,12 +25,10 @@ const listDisplayView = [
 ];
 
 export const List = ({ stateProps }: { stateProps: any }) => {
-  console.log(stateProps, "_stateProps in List");
   const inputRef = useRef<any>(null);
   const {
     state,
     loading,
-    error,
     movieUrlCurrent,
     handleChangeMovieType,
     fetchMovies,
@@ -41,6 +39,12 @@ export const List = ({ stateProps }: { stateProps: any }) => {
 
   const [movieType, setMovieType] = useState("popular");
 
+  const {
+    value: text,
+    setValue: setText,
+    debouncedValue: searchKey,
+  } = useDebouncedValue<string>("");
+
   const loadMoreMovies = () => {
     const searchPoint = `${SEARCH_BASE_URL}${searchKey}&page=${
       state.currentPage + 1
@@ -50,12 +54,6 @@ export const List = ({ stateProps }: { stateProps: any }) => {
     const endpoint = searchKey ? searchPoint : movieTypePoint;
     fetchMovies(endpoint);
   };
-
-  const {
-    value: text,
-    setValue: setText,
-    debouncedValue: searchKey,
-  } = useDebouncedValue<string>("");
 
   useEffect(() => {
     const endpoint = searchKey ? SEARCH_BASE_URL + searchKey : POPULAR_BASE_URL;

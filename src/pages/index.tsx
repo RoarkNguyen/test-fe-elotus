@@ -1,6 +1,10 @@
 import { List } from "@/components/movies/list";
 import styles from "@/styles/movie-list.module.css";
 import Head from "next/head";
+import { Inter } from "next/font/google";
+import clsx from "clsx";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function MovieList({ state }: { state: any }) {
   return (
@@ -11,7 +15,7 @@ export default function MovieList({ state }: { state: any }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main}`}>
+      <main className={clsx(styles.main, inter.className)}>
         <List stateProps={state} />
       </main>
     </>
