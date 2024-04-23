@@ -44,6 +44,7 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
               src={urlImage}
               className={style.image}
               alt={movie.original_title}
+              loading="lazy"
             />
           </FadeIn>
         </div>

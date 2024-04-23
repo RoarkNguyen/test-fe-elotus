@@ -14,14 +14,8 @@ export const useHomeFetch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [movieUrlCurrent, setMovieUrlCurrent] = useState(POPULAR_BASE_URL);
-  // const { isLoading, error, isError, data } = useQuery({
-  //   queryKey: ["todos"],
-  //   queryFn: (endpoint:string) =>
-  //     fetch(endpoint).then((res) => res.json()),
-  // });
 
   const handleChangeMovieType = (type: string) => {
-    console.log(type, "_type");
 
     let endpoint = "";
 
@@ -42,7 +36,6 @@ export const useHomeFetch = () => {
         endpoint = POPULAR_BASE_URL;
         break;
     }
-    console.log(endpoint, "_endpoint change movie");
     setMovieUrlCurrent(endpoint);
     fetchMovies(endpoint);
   };
@@ -58,7 +51,6 @@ export const useHomeFetch = () => {
     };
 
     const isLoadMore = endpoint.search("page");
-    const isQuery = endpoint.search("query");
     
     try {
       
@@ -69,7 +61,7 @@ export const useHomeFetch = () => {
       const result = await response.json();
 
       console.log("Movies", result);
-      const isAdd = isLoadMore !== -1 && isQuery === -1
+      console.log("state", state);
       setState((prev) => ({
         ...prev,
         movies:
@@ -81,7 +73,6 @@ export const useHomeFetch = () => {
       }));
     } catch (error) {
       setError(true);
-      console.log(error,"_error data");
       toast.error("Network response was not ok");
     } finally {
       setLoading(false);

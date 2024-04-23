@@ -35,7 +35,7 @@ export const List = () => {
     handleChangeMovieType,
     fetchMovies,
   } = useHomeFetch();
-  console.log(state, "_state");
+  console.log(state.movies, "_state.movies", state.movies.length);
   const [displayMovie, setDisplayMovie] = useState("grid-view");
 
   const [movieType, setMovieType] = useState("popular");
@@ -134,7 +134,7 @@ export const List = () => {
                   : style.movieGridViewContainer
               }
             >
-              {Array.from({ length: 4 }).map((item, index) => {
+              {Array.from({ length: 5 }).map((item, index) => {
                 if (displayMovie === "list-view") {
                   return <ListCardSkeleton key={index} />;
                 }

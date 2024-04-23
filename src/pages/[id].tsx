@@ -26,7 +26,6 @@ type MovieDetails = {
   vote_count: number;
 };
 export default function MovieDetails({ movie }: { movie: MovieDetails }) {
-  console.log(movie, "_movie");
   const urlImage = movie.poster_path
     ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
     : "/images/no-image.png";
@@ -80,7 +79,6 @@ export default function MovieDetails({ movie }: { movie: MovieDetails }) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context;
-  console.log(query, "_query");
   if (!query.id) return;
   const options = {
     method: "GET",
@@ -91,7 +89,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
   const endpoint = `https://api.themoviedb.org/3/movie/${query.id}?api_key=${API_KEY}`;
-  console.log(endpoint, "_endpoint");
 
   try {
     const data = await (await fetch(endpoint, options)).json();
