@@ -9,11 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.3",
     "clsx": "^2.1.0",
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18",
-    "react-spring": "^9.7.3",
     "react-toastify": "^10.0.5",
     "sass": "^1.75.0"
   },

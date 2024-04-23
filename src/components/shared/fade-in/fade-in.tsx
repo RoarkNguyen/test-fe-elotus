@@ -1,6 +1,5 @@
-import { animated } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
 import { ReactNode } from "react";
-import { useSpring } from "react-spring";
 
 export default function FadeIn({
   children,

@@ -1,5 +1,10 @@
 import FadeIn from "@/components/shared/fade-in/fade-in";
-import { CARD_SIZE, IMAGE_BASE_URL } from "@/config/config";
+import {
+  CARD_SIZE_LARGE,
+  CARD_SIZE_SMALL,
+  IMAGE_BASE_URL,
+} from "@/config/config";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 import { Movie as MovieType } from "@/types";
 import clsx from "clsx";
 import Image from "next/image";
@@ -14,8 +19,12 @@ type Props = {
 };
 
 export const Movie = ({ movie, displayMovie, index, className }: Props) => {
+  const isMobile = useIsMobile();
+
   const urlImage = movie.poster_path
-    ? `${IMAGE_BASE_URL}${CARD_SIZE}${movie.poster_path}`
+    ? `${IMAGE_BASE_URL}${isMobile ? CARD_SIZE_SMALL : CARD_SIZE_LARGE}${
+        movie.poster_path
+      }`
     : "/images/no-image.png";
 
   return (
