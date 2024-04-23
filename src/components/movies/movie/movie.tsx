@@ -45,12 +45,15 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
               className={style.image}
               alt={movie.original_title}
               loading="lazy"
-              quality="85"
             />
           </FadeIn>
         </div>
 
-        <div className={clsx(displayMovie === "grid-view" && style.info)}>
+        <div
+          className={clsx(
+            displayMovie === "grid-view" ? style.gridInfo : style.listInfo
+          )}
+        >
           {movie.title}
         </div>
       </div>

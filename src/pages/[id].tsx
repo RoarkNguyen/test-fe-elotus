@@ -48,7 +48,6 @@ export default function MovieDetails({ movie }: { movie: MovieDetails }) {
                 alt={movie.original_title}
                 width={300}
                 height={450}
-                quality="85"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className={styles.image}
               />
