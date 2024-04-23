@@ -6,7 +6,7 @@ import CloseIcon from "@/icons/close-icon";
 import GridIcon from "@/icons/grid-icon";
 import ListIcon from "@/icons/list-icon";
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { GridCardSkeleton, ListCardSkeleton } from "../shared/skeleton";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
@@ -91,6 +91,7 @@ export const List = ({ stateProps }: { stateProps: any }) => {
               );
             })}
         </div>
+
         <div className={style.sidebarCenter}>
           <div className={style.searchContainer}>
             <input
@@ -112,6 +113,7 @@ export const List = ({ stateProps }: { stateProps: any }) => {
             </div>
           </div>
         </div>
+
         <div className={style.sidebarRight}>
           <div className={style.listDisplayView}>
             {listDisplayView &&
@@ -132,9 +134,12 @@ export const List = ({ stateProps }: { stateProps: any }) => {
           </div>
         </div>
       </div>
+
       <div className={style.contentContainer}>
         <div className={style.content}>
-          {state.movies && state.movies.length > 0 ? (
+          {state.currentPage === 0 ? (
+            <SkeletonMovies displayMovie={displayMovie} />
+          ) : state.movies && state.movies.length > 0 ? (
             <div
               className={
                 displayMovie === "list-view"
@@ -158,23 +163,7 @@ export const List = ({ stateProps }: { stateProps: any }) => {
               <div>Your search did not match any results</div>
             </div>
           )}
-          {loading && (
-            <div
-              className={clsx(
-                style.skeleton,
-                displayMovie === "list-view"
-                  ? style.movieListViewContainer
-                  : style.movieGridViewContainer
-              )}
-            >
-              {Array.from({ length: 5 }).map((item, index) => {
-                if (displayMovie === "list-view") {
-                  return <ListCardSkeleton key={index} />;
-                }
-                return <GridCardSkeleton key={index} />;
-              })}
-            </div>
-          )}
+          {loading && <SkeletonMovies displayMovie={displayMovie} />}
         </div>
 
         {state.currentPage < state.totalPages && !loading && (
@@ -185,6 +174,26 @@ export const List = ({ stateProps }: { stateProps: any }) => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+const SkeletonMovies = ({ displayMovie }: { displayMovie: string }) => {
+  return (
+    <div
+      className={clsx(
+        style.skeleton,
+        displayMovie === "list-view"
+          ? style.movieListViewContainer
+          : style.movieGridViewContainer
+      )}
+    >
+      {Array.from({ length: 5 }).map((item, index) => {
+        if (displayMovie === "list-view") {
+          return <ListCardSkeleton key={index} />;
+        }
+        return <GridCardSkeleton key={index} />;
+      })}
     </div>
   );
 };
