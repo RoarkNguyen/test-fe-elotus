@@ -1,10 +1,11 @@
-import { Movie as MovieType } from "@/types";
-import style from "./movie.module.scss";
-import { useRouter } from "next/router";
-import { IMAGE_BASE_URL, POSTER_SIZE } from "@/config/config";
-import Image from "next/image";
-import clsx from "clsx";
 import FadeIn from "@/components/shared/fade-in/fade-in";
+import { IMAGE_BASE_URL, POSTER_SIZE } from "@/config/config";
+import { Movie as MovieType } from "@/types";
+import clsx from "clsx";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import style from "./movie.module.scss";
 
 type Props = {
   movie: MovieType;
@@ -20,12 +21,12 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
     : "/images/no-image.png";
 
   return (
-    <div
+    <Link
       className={clsx(
         displayMovie === "list-view" ? style.listType : style.gridType,
         className
       )}
-      onClick={() => router.push(`/${movie.id}`)}
+      href={`/${movie.id}`}
     >
       <div
         className={clsx(
@@ -53,6 +54,6 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
           {movie.title}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
