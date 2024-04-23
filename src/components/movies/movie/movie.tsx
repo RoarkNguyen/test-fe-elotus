@@ -45,6 +45,8 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
               className={style.image}
               alt={movie.original_title}
               loading="lazy"
+              placeholder="blur"
+              blurDataURL="/images/blur-image.png"
             />
           </FadeIn>
         </div>

@@ -50,6 +50,8 @@ export default function MovieDetails({ movie }: { movie: MovieDetails }) {
                 height={450}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className={styles.image}
+                placeholder="blur"
+                blurDataURL="/images/blur-image.png"
               />
             </FadeIn>
           </div>
