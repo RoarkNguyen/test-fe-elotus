@@ -1,0 +1,50 @@
+.skeleton {
+    animation: skeleton-loading 0.35s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+.skeletonGridCard {
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 4px;
+}
+
+
+.skeletonListCard {
+    border: 1px solid hsl(200, 20%, 95%);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .title {
+        width: 200px;
+        height: 20px;
+        border-radius: 2px;
+    }
+
+    .image {
+        width: 40px;
+        height: 60px;
+        border-radius: 2px;
+    }
+
+    .number {
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50% 50%;
+    }
+}

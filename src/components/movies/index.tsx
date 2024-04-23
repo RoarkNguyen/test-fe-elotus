@@ -3,16 +3,15 @@ import { POPULAR_BASE_URL, SEARCH_BASE_URL } from "@/config/config";
 import { listMovieType } from "@/constants";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useHomeFetch } from "@/hooks/useHomeFetch";
-import { useEffect, useRef, useState } from "react";
-import style from "./list.module.scss";
-import { Movie } from "./movie/movie";
-import { DisplayViewType, MovieType } from "@/types";
-import clsx from "clsx";
+import CloseIcon from "@/icons/close-icon";
 import GridIcon from "@/icons/grid-icon";
 import ListIcon from "@/icons/list-icon";
-import { toast } from "react-toastify";
-import CloseIcon from "@/icons/close-icon";
-import { GridCardSkeleton, ListCardSkeleton } from "../shared/skeleton";
+import clsx from "clsx";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import style from "./index.module.scss";
+import { Movie } from "./movie/movie";
+
+const Movies = lazy(() => import("./list/list"));
 
 const listDisplayView = [
   {
@@ -129,20 +128,7 @@ export const List = () => {
       <div className={style.contentContainer}>
         <div className={style.content}>
           {loading ? (
-            <div
-              className={
-                displayMovie === "list-view"
-                  ? style.movieListViewContainer
-                  : style.movieGridViewContainer
-              }
-            >
-              {Array.from({ length: 4 }).map((item, index) => {
-                if (displayMovie === "list-view") {
-                  return <ListCardSkeleton key={index} />;
-                }
-                return <GridCardSkeleton key={index} />;
-              })}
-            </div>
+            <Loading />
           ) : state.movies && state.movies.length > 0 ? (
             <div
               className={

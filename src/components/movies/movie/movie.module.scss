@@ -1,9 +1,9 @@
 .listType {
 
   .content {
-    border: 1px solid #ddd;
+    border: 1px solid #405cf5;
     border-radius: 4px;
-    padding: 0.25rem 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     gap: 1rem
@@ -12,6 +12,17 @@
   .content:hover {
     opacity: 0.7;
     cursor: pointer;
+  }
+
+  .number {
+    background-color: #405cf5;
+    color: #fff;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% 50%;
   }
 
 }

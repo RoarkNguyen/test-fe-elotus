@@ -32,7 +32,9 @@ export const Movie = ({ movie, displayMovie, index, className }: Props) => {
           displayMovie === "list-view" ? style.listType : style.gridType
         )}
       >
-        {displayMovie === "list-view" && <div>{index}</div>}
+        {displayMovie === "list-view" && (
+          <div className={style.number}>{index}</div>
+        )}
         <div className={style.imgContainer}>
           <img
             width={displayMovie === "list-view" ? 40 : 80}
