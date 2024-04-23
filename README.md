@@ -1,1 +1,1 @@
-
+1. Blur image
