@@ -6,7 +6,7 @@ import CloseIcon from "@/icons/close-icon";
 import GridIcon from "@/icons/grid-icon";
 import ListIcon from "@/icons/list-icon";
 import clsx from "clsx";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GridCardSkeleton, ListCardSkeleton } from "../shared/skeleton";
 import style from "./list.module.scss";
 import { Movie } from "./movie/movie";
@@ -108,6 +108,7 @@ export const List = ({ stateProps }: { stateProps: any }) => {
                 inputRef.current.value = "";
                 setText("");
               }}
+              aria-label="Clear search"
             >
               <CloseIcon />
             </div>
@@ -126,6 +127,7 @@ export const List = ({ stateProps }: { stateProps: any }) => {
                       displayMovie === view.key && style.displayViewActive
                     )}
                     onClick={() => setDisplayMovie(view.key)}
+                    aria-label={view.name}
                   >
                     {view.icon}
                   </div>
