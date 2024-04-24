@@ -2,6 +2,13 @@
 
 ### https://movies-with-themoviedb-api.netlify.app/
 
+## Video Walkthrough 
+Software for GIF screen recording not available. Alternative formats suggested
+
+
+### Desktop: https://www.loom.com/share/70687eedb7f846309a31f6cd1f17f67d?sid=573f1b71-8eca-4159-80ba-2464b768d562
+### Mobile: https://files.fm/f/48bv6mxdhm
+
 ## User Stories
 
 The following **required** functionality is completed:
