@@ -1,0 +1,45 @@
+.main {
+    padding: 0rem 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12rem;
+    text-align: center;
+}
+
+.content h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.content p {
+    font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 900px) { 
+    .main {
+        padding: 0rem 12px;
+    }
+
+    .content {
+        padding: 0 12px;
+    }
+
+    .content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .content p {
+        font-size: 0.875rem;
+    }
+    
+}

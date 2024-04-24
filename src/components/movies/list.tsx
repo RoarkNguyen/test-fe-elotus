@@ -9,7 +9,6 @@ import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { GridCardSkeleton, ListCardSkeleton } from "../shared/skeleton";
 import style from "./list.module.scss";
-import { Movie } from "./movie/movie";
 import MemoizedMovies from "./results/results";
 
 const listDisplayView = [

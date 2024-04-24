@@ -93,18 +93,19 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const endpoint = `https://api.themoviedb.org/3/movie/${query.id}?api_key=${API_KEY}`;
 
-  try {
-    const data = await (await fetch(endpoint, options)).json();
-    return {
-      props: { movie: data },
-    };
-  } catch (error) {
+  const response = await fetch(endpoint, options);
+  if (!response.ok) {
     return {
       redirect: {
         permanent: false,
         destination: "/404",
       },
-      props: {},
     };
   }
+
+  const result = await response.json();
+
+  return {
+    props: { movie: result },
+  };
 }
